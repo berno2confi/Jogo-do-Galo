@@ -11,7 +11,7 @@
         <h1>TIC TAC TOE</h1>
         <div class="box">
             <form id="grid-form">
-                <label for="grid-size">Select Grid Size:</label>
+                <label for="size">Select Grid Size:</label>
                 <select id="grid-size" name="grid-size">
                     <option value="3">3 x 3</option>
                     <option value="4">4 x 4</option>
@@ -23,6 +23,6 @@
             </form>
         </div>
     </div>
-    <script src="select.js" defer></script>
+    <script src="select.js"></script>
 </body>
 </html>
