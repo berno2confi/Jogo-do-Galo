@@ -13,14 +13,12 @@ const winConditions = [
     [0, 4, 8],
     [2, 4, 6]
 ]
-//let options = new Array(9).fill("");    
 let currentPlayer = "X";
 let running = false;
 
 initialize();
 
 
-// Start game, by making cells interactive
 function initialize() {
     cells.forEach(cell => cell.addEventListener("click", cellClicked));
     restartBtn.addEventListener("click", restartGame);
@@ -28,7 +26,6 @@ function initialize() {
     running = true;
 }
 
-// What happens when a cell is clicked
 function cellClicked() {
     const index = this.getAttribute("cellIndex");
 
@@ -38,8 +35,10 @@ function cellClicked() {
     updateCell(index);
     checkWinner();
 
-    //if (running) setTimeout(botsTurn, 500); // Add a slight delay for the bot's move
+    if (running) setTimeout(botsTurn, 500);
 }
+
+
 
 
 function updateCell(index) {
@@ -88,28 +87,49 @@ function restartGame() {
     running = true;
 }
 
-/*function botsTurn() {
+function botsTurn() {
     // First phase: check if there is any cell that must be filled
     for (let i = 0; i < winConditions.length; i++) {
         const condition = winConditions[i];
-        const c1 = options[condition[0]];
-        const c2 = options[condition[1]];
-        const c3 = options[condition[2]];
+        const c1 = cells[condition[0]].textContent;
+        const c2 = cells[condition[1]].textContent;
+        const c3 = cells[condition[2]].textContent;
 
         if (c1 == "X" && c2 == "X" && c3 == "") {
-            updateCell(cells[condition[2]], condition[2]);
+            updateCell(condition[2]);
+            checkWinner();
+            return;
         }
         else if (c1 == "X" && c2 == "" && c3 == "X") {
-            updateCell(cells[condition[1]], condition[1]);
+            updateCell(condition[1]);
+            checkWinner();
+            return;
         }
         else if (c1 == "" && c2 == "X" && c3 == "X") {
-            updateCell(cells[condition[0]], condition[10]);
+            updateCell(condition[0]);
+            checkWinner();
+            return;
         }
+
     }
 
     // Second phase: go straight to the middle cell if unoccupied - greedy
-    if (options[4] == "") updateCell(cells[4], 4);
-}*/
+    if (cells[4].textContent == "") {
+        updateCell(4);
+        checkWinner();
+        return;
+    }
+
+    // Third phase: implement choice algorithm
+    for (let i = 0; i < cells.length; i++) {
+        if (cells[i].textContent == "") {
+            updateCell(i);
+            checkWinner();
+            break;
+        }
+    }
+
+}
 
 
 
