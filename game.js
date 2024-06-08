@@ -1,14 +1,3 @@
-/*const winConditions = [
-    [0, 1, 2], 
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-]*/
-
 // Draw the game
 
 let gridSize = 3;
@@ -62,8 +51,7 @@ function setWinConditions() {
 
 setWinConditions();
 
-//console.log("Win conditions for grid size " + gridSize + ":", winConditions);
-
+//////////////////////////////////////////////
 
 
 // Initial game logic
@@ -87,7 +75,7 @@ function initialize() {
 function cellClicked() {
     const index = this.getAttribute("cellIndex");
 
-    if (cells[index].textContent != "" || !running)  // options was here
+    if (cells[index].textContent != "" || !running) 
         return;
 
     updateCell(index);
@@ -97,10 +85,8 @@ function cellClicked() {
 }
 
 
-
-
 function updateCell(index) {
-    cells[index].textContent = currentPlayer;  // options was here
+    cells[index].textContent = currentPlayer; 
 }
 
 function changePlayer() {
@@ -114,13 +100,11 @@ function checkWinner() {
 
     for (let i = 0; i < winConditions.length; i++) {
         const condition = winConditions[i];
-        const c1 = cells[condition[0]].textContent;
-        const c2 = cells[condition[1]].textContent;
-        const c3 = cells[condition[2]].textContent;
+        const conditionValues = condition.map(index => cells[index].textContent);
 
-        if (c1 == "" || c2 == "" || c3 == "") continue;
+        if (conditionValues.includes("")) continue;
 
-        if (c1 == c2 && c2 == c3) {
+        if (conditionValues.every(val => val === conditionValues[0])) {
             roundWon = true;
             break;
         }
@@ -139,7 +123,7 @@ function checkWinner() {
 
 
 function restartGame() {
-    currentPlayer = "X";  // options was here
+    currentPlayer = "X";
     statusText.textContent = `Joga ${currentPlayer}!`
     cells.forEach(cell => cell.textContent = "");
     running = true;
@@ -170,14 +154,12 @@ function botsTurn() {
         }
 
     }
-
     // Second phase: go straight to the middle cell if unoccupied - greedy
     if (cells[4].textContent == "") {
         updateCell(4);
         checkWinner();
         return;
     }
-
     // Third phase: implement choice algorithm
     for (let i = 0; i < cells.length; i++) {
         if (cells[i].textContent == "") {
@@ -190,3 +172,30 @@ function botsTurn() {
 }
 
 
+/*function checkWinner() {
+    let roundWon = false;
+
+    for (let i = 0; i < winConditions.length; i++) {
+        const condition = winConditions[i];
+        const c1 = cells[condition[0]].textContent;
+        const c2 = cells[condition[1]].textContent;
+        const c3 = cells[condition[2]].textContent;
+
+        if (c1 == "" || c2 == "" || c3 == "") continue;
+
+        if (c1 == c2 && c2 == c3) {
+            roundWon = true;
+            break;
+        }
+    }
+
+    if (roundWon) {
+        statusText.textContent = `${currentPlayer} ganhou!`;
+        running = false;
+    } 
+    else if (![...cells].map(cell => cell.textContent).includes("")) {      // options was here
+        statusText.textContent = `Empate!`;
+        running = false;
+    }
+    else changePlayer();
+}*/
