@@ -1,3 +1,16 @@
+/*const winConditions = [
+    [0, 1, 2], 
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]*/
+
+// Draw the game
+
 let gridSize = 3;
 
 function drawGame() {
@@ -14,21 +27,50 @@ function drawGame() {
 
 drawGame();
 
+// Set win conditions
+
+const winConditions = [];
+
+function setWinConditions() {
+    // Rows
+    for (let i = 0; i < gridSize; i++) {
+        const row = [];
+        for (let j = 0; j < gridSize; j++) {
+            row.push(i * gridSize + j);
+        }
+        winConditions.push(row);
+    }
+
+    // Columns
+    for (let i = 0; i < gridSize; i++) {
+        const column = [];
+        for (let j = 0; j < gridSize; j++) {
+            column.push(i + j * gridSize);
+        }
+        winConditions.push(column);
+    }
+
+    // Diagonals
+    const diagonal1 = [];
+    const diagonal2 = [];
+    for (let i = 0; i < gridSize; i++) {
+        diagonal1.push(i * gridSize + i);
+        diagonal2.push((i + 1) * gridSize - (i + 1));
+    }
+    winConditions.push(diagonal1, diagonal2);
+}
+
+setWinConditions();
+
+//console.log("Win conditions for grid size " + gridSize + ":", winConditions);
+
+
+
 // Initial game logic
 
 const cells = document.querySelectorAll(".cell");
 const statusText = document.querySelector("#statusText");
 const restartBtn = document.querySelector("#restartBtn");
-const winConditions = [
-    [0, 1, 2], 
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-]
 let currentPlayer = "X";
 let running = false;
 
@@ -146,6 +188,5 @@ function botsTurn() {
     }
 
 }
-
 
 
