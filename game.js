@@ -1,3 +1,19 @@
+let gridSize = 3;
+
+function drawGame() {
+    const cellContainer = document.getElementById("cellContainer");
+    cellContainer.innerHTML = ""; // Clear any existing cells
+
+    for (let i = 0; i < gridSize * gridSize; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.setAttribute("cellIndex", i);
+        cellContainer.appendChild(cell);
+    }
+}
+
+drawGame();
+
 // Initial game logic
 
 const cells = document.querySelectorAll(".cell");
