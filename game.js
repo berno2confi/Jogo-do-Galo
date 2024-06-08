@@ -88,24 +88,24 @@ function restartGame() {
 }
 
 function botsTurn() {
-    // First phase: check if there is any cell that must be filled
+    // First phase: check if there is any cell that must be filled, and win if possible
     for (let i = 0; i < winConditions.length; i++) {
         const condition = winConditions[i];
         const c1 = cells[condition[0]].textContent;
         const c2 = cells[condition[1]].textContent;
         const c3 = cells[condition[2]].textContent;
 
-        if (c1 == "X" && c2 == "X" && c3 == "") {
+        if (c1 != "" && c2 != "" && c3 == "" && c1 == c2) {
             updateCell(condition[2]);
             checkWinner();
             return;
         }
-        else if (c1 == "X" && c2 == "" && c3 == "X") {
+        else if (c1 != "" && c2 == "" && c3 != "" && c1 == c3) {
             updateCell(condition[1]);
             checkWinner();
             return;
         }
-        else if (c1 == "" && c2 == "X" && c3 == "X") {
+        else if (c1 == "" && c2 != "" && c3 != "" && c2 == c3) {
             updateCell(condition[0]);
             checkWinner();
             return;
