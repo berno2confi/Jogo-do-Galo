@@ -56,20 +56,34 @@ setWinConditions();
 
 // Initial game logic
 
-const cells = document.querySelectorAll(".cell");
-const statusText = document.querySelector("#statusText");
-const restartBtn = document.querySelector("#restartBtn");
-let currentPlayer = "X";
+let cells;
+let statusText;
+let restartBtn;
+let currentPlayer;
+let playerChoice;
 let running = false;
 
-initialize();
+// Get chosen player
+window.addEventListener("load", () => {
+    playerChoice = localStorage.getItem("jogador");
+    if (!playerChoice) window.location.href = "index.html";
+    else initialize();
+})
 
 
 function initialize() {
+    cells = document.querySelectorAll(".cell");
+    statusText = document.querySelector("#statusText");
+    restartBtn = document.querySelector("#restartBtn");
+
     cells.forEach(cell => cell.addEventListener("click", cellClicked));
     restartBtn.addEventListener("click", restartGame);
+
+    currentPlayer = "X";
     statusText.textContent = `Joga ${currentPlayer}!`;
     running = true;
+
+    if (playerChoice === "O") setTimeout(botsTurn, 500);
 }
 
 function cellClicked() {
@@ -127,6 +141,8 @@ function restartGame() {
     statusText.textContent = `Joga ${currentPlayer}!`
     cells.forEach(cell => cell.textContent = "");
     running = true;
+
+    if (playerChoice == "O") setTimeout(botsTurn, 500);
 }
 
 function botsTurn() {
@@ -172,30 +188,4 @@ function botsTurn() {
 }
 
 
-/*function checkWinner() {
-    let roundWon = false;
 
-    for (let i = 0; i < winConditions.length; i++) {
-        const condition = winConditions[i];
-        const c1 = cells[condition[0]].textContent;
-        const c2 = cells[condition[1]].textContent;
-        const c3 = cells[condition[2]].textContent;
-
-        if (c1 == "" || c2 == "" || c3 == "") continue;
-
-        if (c1 == c2 && c2 == c3) {
-            roundWon = true;
-            break;
-        }
-    }
-
-    if (roundWon) {
-        statusText.textContent = `${currentPlayer} ganhou!`;
-        running = false;
-    } 
-    else if (![...cells].map(cell => cell.textContent).includes("")) {      // options was here
-        statusText.textContent = `Empate!`;
-        running = false;
-    }
-    else changePlayer();
-}*/

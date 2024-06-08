@@ -1,20 +1,18 @@
-function checkWinner() {
-    let roundWon = true;
+/*function checkWinner() {
+    let roundWon = false;
 
     for (let i = 0; i < winConditions.length; i++) {
         const condition = winConditions[i];
-        
-        for (let j = 1; j < condition.length; j++) {
-            c1 = cells[condition[j - 1]].textContent;
-            c2 = cells[condition[j]].textContent;
+        const c1 = cells[condition[0]].textContent;
+        const c2 = cells[condition[1]].textContent;
+        const c3 = cells[condition[2]].textContent;
 
-            if (c1 == "" || c2 == "" || c1 != c2) {
-                roundWon = false;
-                break;
-            }
+        if (c1 == "" || c2 == "" || c3 == "") continue;
+
+        if (c1 == c2 && c2 == c3) {
+            roundWon = true;
+            break;
         }
-        
-        if (!roundWon) break;
     }
 
     if (roundWon) {
@@ -26,4 +24,4 @@ function checkWinner() {
         running = false;
     }
     else changePlayer();
-}
+}*/
