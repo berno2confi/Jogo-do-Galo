@@ -59,6 +59,7 @@ setWinConditions();
 let cells;
 let statusText;
 let restartBtn;
+let reselectBtn;
 let currentPlayer;
 let playerChoice;
 let running = false;
@@ -75,13 +76,17 @@ function initialize() {
     cells = document.querySelectorAll(".cell");
     statusText = document.querySelector("#statusText");
     restartBtn = document.querySelector("#restartBtn");
+    reselectBtn = document.querySelector("#reselectBtn");
 
     cells.forEach(cell => cell.addEventListener("click", cellClicked));
     restartBtn.addEventListener("click", restartGame);
+    reselectBtn.addEventListener("click", reselectPlayer);
 
     currentPlayer = "X";
     statusText.textContent = `Joga ${currentPlayer}!`;
     running = true;
+
+    reselectBtn.style.display = "none";
 
     if (playerChoice === "O") setTimeout(botsTurn, 500);
 }
@@ -127,10 +132,12 @@ function checkWinner() {
     if (roundWon) {
         statusText.textContent = `${currentPlayer} ganhou!`;
         running = false;
+        reselectBtn.style.display = "block"; 
     } 
     else if (![...cells].map(cell => cell.textContent).includes("")) {      // options was here
         statusText.textContent = `Empate!`;
         running = false;
+        reselectBtn.style.display = "block"; 
     }
     else changePlayer();
 }
@@ -142,7 +149,14 @@ function restartGame() {
     cells.forEach(cell => cell.textContent = "");
     running = true;
 
+    reselectBtn.style.display = "none"; 
+
     if (playerChoice == "O") setTimeout(botsTurn, 500);
+}
+
+function reselectPlayer() {
+    localStorage.removeItem("jogador");
+    window.location.href = "index.html";
 }
 
 function botsTurn() {
