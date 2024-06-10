@@ -154,7 +154,7 @@ function checkWinner() {
     }
     else {
         changePlayer();
-        if (moves.length >= 6) setTimeout(continueGame, 700);
+        if (moves.length >= 6) setTimeout(continueGame, 700);  // 6 is just the number of moves in a 3x3 grid
     }
 }
 
