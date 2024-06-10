@@ -106,7 +106,7 @@ function cellClicked() {
 
     updateCell(index);
 
-    if (running) setTimeout(botsTurn, 1250);
+    if (running) setTimeout(botsTurn, 1200);
 
 }
 
@@ -220,11 +220,12 @@ function botsTurn() {
 
 
 function continueGame() {
-    const moveToRemove = moves[0];
-    moves.shift() // removes first inserted element of the list
-    cells[moveToRemove].textContent = "";
-    cells[moveToRemove].classList.remove("X", "O");
-    //checkWinner(); // in theory, no one will lose with the removal of any cell
+    if (moves.length > 0) {
+        const moveToRemove = moves[0];
+        moves.shift(); // removes first inserted element of the list
+        cells[moveToRemove].textContent = "";
+        cells[moveToRemove].classList.remove("X", "O");
+    }
 }
 
 
