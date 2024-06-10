@@ -165,34 +165,34 @@ function botsTurn() {
     // First phase: check if there is any cell that must be filled, and win if possible
     for (let i = 0; i < winConditions.length; i++) {
         const condition = winConditions[i];
-        const c1 = cells[condition[0]].textContent;
-        const c2 = cells[condition[1]].textContent;
-        const c3 = cells[condition[2]].textContent;
+        const conditionValues = condition.map(index => cells[index].textContent);
 
-        if (c1 != "" && c2 != "" && c3 == "" && c1 == c2) {
-            updateCell(condition[2]);
-            checkWinner();
-            return;
-        }
-        else if (c1 != "" && c2 == "" && c3 != "" && c1 == c3) {
-            updateCell(condition[1]);
-            checkWinner();
-            return;
-        }
-        else if (c1 == "" && c2 != "" && c3 != "" && c2 == c3) {
-            updateCell(condition[0]);
-            checkWinner();
-            return;
+        const emptyIndices = [];
+        const filledValues = [];
+
+        for (let j = 0; j < condition.length; j++) {
+            if (conditionValues[j] == "") 
+                emptyIndices.push(condition[j]);
+            else 
+                filledValues.push(conditionValues[j]);
         }
 
+        if (filledValues.length === gridSize - 1 && emptyIndices.length === 1) {
+            if (filledValues.every(val => val === filledValues[0])) {
+                updateCell(emptyIndices[0]);
+                checkWinner();
+                return;
+            }
+        }
     }
     // Second phase: go straight to the middle cell if unoccupied - greedy
-    if (cells[4].textContent == "") {
-        updateCell(4);
+    const middleIndex = Math.floor((gridSize * gridSize) / 2);
+    if (cells[middleIndex].textContent == "") {
+        updateCell(middleIndex);
         checkWinner();
         return;
     }
-    // Third phase: implement choice algorithm
+    // Third phase: implement some choice algorithm
     for (let i = 0; i < cells.length; i++) {
         if (cells[i].textContent == "") {
             updateCell(i);
