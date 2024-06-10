@@ -52,6 +52,13 @@ function setWinConditions() {
 drawGame();
 setWinConditions();
 
+// initialize()
+// cellClicked()
+// updateCell()
+// changePlayer()
+// checkWinner()
+// botsTurn()
+
 // Initial game logic
 
 let cells;
@@ -60,6 +67,7 @@ let restartBtn;
 let reselectBtn;
 let currentPlayer;
 let playerChoice;
+let moves = [];
 let running = false;
 
 // Get chosen player
@@ -85,7 +93,7 @@ function initialize() {
     statusText.textContent = `Joga ${currentPlayer}!`;
     running = true;
 
-    reselectBtn.style.display = "none";
+    //reselectBtn.style.display = "none";
 
     if (playerChoice === "O") setTimeout(botsTurn, 500);
 }
@@ -97,16 +105,19 @@ function cellClicked() {
         return;
 
     updateCell(index);
-    checkWinner();
 
-    if (running) setTimeout(botsTurn, 500);
+    if (running) setTimeout(botsTurn, 1250);
+
 }
 
 
 function updateCell(index) {
     cells[index].textContent = currentPlayer; 
+    moves.push(index);
     cells[index].classList.add(currentPlayer);  // append x or o to the end of "cell", for styling purposes
+    checkWinner();
 }
+
 
 function changePlayer() {
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
@@ -134,19 +145,23 @@ function checkWinner() {
         if (currentPlayer == "X") statusText.style.color = "#FF6666";  
         else statusText.style.color = "#ADD8E6"; 
         running = false;
-        reselectBtn.style.display = "block"; 
+        //reselectBtn.style.display = "block"; 
     } 
-    else if (![...cells].map(cell => cell.textContent).includes("")) {      // options was here
+    else if (![...cells].map(cell => cell.textContent).includes("")) {  
         statusText.textContent = `Empate!`;
         running = false;
         reselectBtn.style.display = "block"; 
     }
-    else changePlayer();
+    else {
+        changePlayer();
+        if (moves.length >= 6) setTimeout(continueGame, 700);
+    }
 }
 
 
 function restartGame() {
     currentPlayer = "X";
+    moves = [];
     statusText.textContent = `Joga ${currentPlayer}!`
     statusText.style.color = ""
     cells.forEach(cell => {
@@ -184,7 +199,6 @@ function botsTurn() {
         if (filledValues.length === gridSize - 1 && emptyIndices.length === 1) {
             if (filledValues.every(val => val === filledValues[0])) {
                 updateCell(emptyIndices[0]);
-                checkWinner();
                 return;
             }
         }
@@ -193,19 +207,27 @@ function botsTurn() {
     const middleIndex = Math.floor((gridSize * gridSize) / 2);
     if (cells[middleIndex].textContent == "") {
         updateCell(middleIndex);
-        checkWinner();
         return;
     }
     // Third phase: implement some choice algorithm
     for (let i = 0; i < cells.length; i++) {
         if (cells[i].textContent == "") {
             updateCell(i);
-            checkWinner();
             break;
         }
     }
-
 }
+
+
+function continueGame() {
+    const moveToRemove = moves[0];
+    moves.shift() // removes first inserted element of the list
+    cells[moveToRemove].textContent = "";
+    cells[moveToRemove].classList.remove("X", "O");
+    //checkWinner(); // in theory, no one will lose with the removal of any cell
+}
+
+
 
 
 
