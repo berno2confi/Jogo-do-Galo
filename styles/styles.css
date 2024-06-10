@@ -35,29 +35,6 @@ h1 {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.cell:hover {
-    background-color: #e0e0e0;
-}
-
-.cell.X {
-    color: #FF6666;
-    transform: scale(1.1); 
-}
-
-.cell.O {
-    color: #ADD8E6; 
-    transform: scale(1.1); 
-}
-
-@keyframes scale-up {
-    0% {
-        transform: scale(0.8);
-    }
-    100% {
-        transform: scale(1.2);
-    }
-}
-
 #gameContainer {
     text-align: center;
 }
@@ -71,7 +48,6 @@ h1 {
 
 /**/
 
-
 /* Buttons */
 
 button {
@@ -82,14 +58,14 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
+    transition: background-color 0.2s; 
 }
 
 #buttonWrapper2 {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the buttons horizontally */
+    width: 100%;
     gap: 1em;
 }
 
@@ -120,3 +96,38 @@ button:hover {
 }
 
 /**/
+
+/* Transitions */
+
+.cell:hover {
+    background-color: #e0e0e0;
+}
+
+.cell.X {
+    color: #FF6666;
+    transform: scale(1.1); 
+}
+
+.cell.O {
+    color: #ADD8E6; 
+    transform: scale(1.1); 
+}
+
+@keyframes scale-up {
+    0% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 2px #666;
+    transform: translateY(4px); /* Move button down on click */
+}
