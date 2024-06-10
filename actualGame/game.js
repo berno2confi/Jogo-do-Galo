@@ -14,8 +14,6 @@ function drawGame() {
     }
 }
 
-drawGame();
-
 // Set win conditions
 
 const winConditions = [];
@@ -49,10 +47,10 @@ function setWinConditions() {
     winConditions.push(diagonal1, diagonal2);
 }
 
-setWinConditions();
-
 //////////////////////////////////////////////
 
+drawGame();
+setWinConditions();
 
 // Initial game logic
 
@@ -67,9 +65,10 @@ let running = false;
 // Get chosen player
 window.addEventListener("load", () => {
     playerChoice = localStorage.getItem("jogador");
-    if (!playerChoice) window.location.href = "index.html";
+    if (!playerChoice) window.location.href = "../index.html";
     else initialize();
 })
+
 
 
 function initialize() {
