@@ -3,7 +3,7 @@ document.getElementById("playerO").addEventListener("click", () => choosePlayer(
 
 function choosePlayer(player) {
     localStorage.setItem("jogador", player);
-    window.location.href = "game.html";
+    window.location.href = "actualGame/game.html";
 }
 
 

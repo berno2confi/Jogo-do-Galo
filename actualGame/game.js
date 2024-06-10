@@ -159,7 +159,7 @@ function restartGame() {
 
 function reselectPlayer() {
     localStorage.removeItem("jogador");
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
 }
 
 function botsTurn() {
