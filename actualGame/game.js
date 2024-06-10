@@ -105,6 +105,7 @@ function cellClicked() {
 
 function updateCell(index) {
     cells[index].textContent = currentPlayer; 
+    cells[index].classList.add(currentPlayer);  // append x or o to the end of "cell", for styling purposes
 }
 
 function changePlayer() {
@@ -130,8 +131,8 @@ function checkWinner() {
 
     if (roundWon) {
         statusText.textContent = `${currentPlayer} ganhou!`;
-        if (currentPlayer == "X") statusText.style.color = "#D8BFD8";  
-        else statusText.style.color = "#F08080"; 
+        if (currentPlayer == "X") statusText.style.color = "#FF6666";  
+        else statusText.style.color = "#ADD8E6"; 
         running = false;
         reselectBtn.style.display = "block"; 
     } 
@@ -148,7 +149,10 @@ function restartGame() {
     currentPlayer = "X";
     statusText.textContent = `Joga ${currentPlayer}!`
     statusText.style.color = ""
-    cells.forEach(cell => cell.textContent = "");
+    cells.forEach(cell => {
+        cell.textContent = ""
+        cell.classList.remove("X", "O");
+    });
     running = true;
 
     reselectBtn.style.display = "none"; 
