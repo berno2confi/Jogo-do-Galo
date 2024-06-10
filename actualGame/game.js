@@ -185,7 +185,7 @@ function botsTurn() {
             }
         }
     }
-    // Second phase: go straight to the middle cell if unoccupied - greedy
+    // Second phase: go straight for the middle cell if unoccupied - greedy
     const middleIndex = Math.floor((gridSize * gridSize) / 2);
     if (cells[middleIndex].textContent == "") {
         updateCell(middleIndex);
