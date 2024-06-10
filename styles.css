@@ -30,7 +30,7 @@ button:hover {
     background-color: #45a049;
 }
 
-#buttons {
+#buttonWrapper2 {
     display: grid;
     gap: 1em;
 }
@@ -43,15 +43,21 @@ button:hover {
     height: 100vh; 
 
     h2 {
-        font-size: 70px;
+        font-size: 80px;
         padding-top: 0%;
         margin-top: 0%;
     }
 
     #buttonWrapper {
-        padding: 30px 40px; /* Increase padding */
+        padding-top: 30px;
+        align-items: center;
         display: flex;
-        gap: 40px; /* Space between the buttons */
+        gap: 100px; /* Space between the buttons */
+        & #playerX, #playerO {
+            width: 120px;
+            height: 100px;
+            font-size: 50px;
+        }
     }
 }
 

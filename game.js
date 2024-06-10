@@ -131,6 +131,8 @@ function checkWinner() {
 
     if (roundWon) {
         statusText.textContent = `${currentPlayer} ganhou!`;
+        if (currentPlayer == "X") statusText.style.color = "#D8BFD8";  
+        else statusText.style.color = "#F08080"; 
         running = false;
         reselectBtn.style.display = "block"; 
     } 
@@ -146,6 +148,7 @@ function checkWinner() {
 function restartGame() {
     currentPlayer = "X";
     statusText.textContent = `Joga ${currentPlayer}!`
+    statusText.style.color = ""
     cells.forEach(cell => cell.textContent = "");
     running = true;
 
