@@ -106,7 +106,7 @@ function cellClicked() {
 
     updateCell(index);
 
-    if (running) setTimeout(botsTurn, 1200);
+    if (running) setTimeout(botsTurn, 1100);
 
 }
 
@@ -170,7 +170,7 @@ function restartGame() {
     });
     running = true;
 
-    reselectBtn.style.display = "none"; 
+    //reselectBtn.style.display = "none"; 
 
     if (playerChoice == "O") setTimeout(botsTurn, 500);
 }
