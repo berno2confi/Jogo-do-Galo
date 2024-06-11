@@ -145,3 +145,9 @@ button:active {
     box-shadow: 0 2px #666;
     transform: translateY(4px); /* Move button down on click */
 }
+
+.button-pressed {
+    background-color: #2e7d32;
+    box-shadow: 0 2px #666;
+    transform: translateY(4px); 
+}
