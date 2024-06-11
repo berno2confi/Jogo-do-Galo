@@ -106,9 +106,10 @@ function cellClicked() {
 
     updateCell(index);
 
-    if (running) setTimeout(botsTurn, 1100);
+    if (running) setTimeout(botsTurn, 1200);
 
 }
+
 
 
 function updateCell(index) {
@@ -118,12 +119,10 @@ function updateCell(index) {
     checkWinner();
 }
 
-
 function changePlayer() {
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
     statusText.textContent = `Joga ${currentPlayer}!`
 }
-
 
 function checkWinner() {
     let roundWon = false;
@@ -158,7 +157,6 @@ function checkWinner() {
     }
 }
 
-
 function restartGame() {
     currentPlayer = "X";
     moves = [];
@@ -173,6 +171,15 @@ function restartGame() {
     //reselectBtn.style.display = "none"; 
 
     if (playerChoice == "O") setTimeout(botsTurn, 500);
+}
+
+function continueGame() {
+    if (moves.length > 0) {
+        const moveToRemove = moves[0];
+        moves.shift(); // removes first inserted element of the list
+        cells[moveToRemove].textContent = "";
+        cells[moveToRemove].classList.remove("X", "O");
+    }
 }
 
 function reselectPlayer() {
@@ -209,24 +216,20 @@ function botsTurn() {
         updateCell(middleIndex);
         return;
     }
-    // Third phase: implement some choice algorithm
+    // Third phase: implement some choice algorithm, random in this case
+    const emptyCells = [];
     for (let i = 0; i < cells.length; i++) {
         if (cells[i].textContent == "") {
-            updateCell(i);
-            break;
+            emptyCells.push(i);
         }
     }
-}
-
-
-function continueGame() {
-    if (moves.length > 0) {
-        const moveToRemove = moves[0];
-        moves.shift(); // removes first inserted element of the list
-        cells[moveToRemove].textContent = "";
-        cells[moveToRemove].classList.remove("X", "O");
+    if (emptyCells.length > 0) {
+        const randomIndex = Math.floor(Math.random() * emptyCells.length);
+        updateCell(emptyCells[randomIndex]);
     }
 }
+
+
 
 
 
