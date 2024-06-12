@@ -72,7 +72,9 @@ let running = false;
 
 // Get chosen player
 window.addEventListener("load", () => {
-    playerChoice = localStorage.getItem("jogador");
+    const pressedButtons = JSON.parse(localStorage.getItem("pressedButtons"));
+    if (pressedButtons["playerX"]) playerChoice = "X";
+    else playerChoice = "O";
     if (!playerChoice) window.location.href = "../index.html";
     else initialize();
 })
@@ -109,7 +111,6 @@ function cellClicked() {
     if (running) setTimeout(botsTurn, 1200);
 
 }
-
 
 
 function updateCell(index) {
