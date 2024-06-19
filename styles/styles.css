@@ -70,8 +70,10 @@ button {
 }
 
 #allBtns {
+    transform: translateY(-5em);
     display: flex;
     flex-direction: column;
+
     #play {
         transform: translateX(340px);
         font-size: 50px;
@@ -81,9 +83,17 @@ button {
     #play:disabled {
         background-color: #aaa; /* Grey background for disabled state */
     }
+
+    #info {
+        margin: 0 auto;
+        /*margin-top: 50px;*/
+        transform: translateY(5em);
+        text-align: center;
+    }
 }
 
 #selectionContainer {
+    margin-top: -20px;    /* cheat to move things up */
     display: grid;
     row-gap: 10em;
     column-gap: 3em;
@@ -157,4 +167,13 @@ button:active {
     background-color: #2e7d32;
     box-shadow: 0 2px #666;
     transform: translateY(4px); 
+}
+
+#info p {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#info p.show {
+    opacity: 1;
 }

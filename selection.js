@@ -40,7 +40,6 @@ function pressDown(element, key) {
             if (pressedButtons.solo)
                 releaseButton(solo, "solo");
         }
-
         pressButton(element, key);
     });
 }
@@ -65,6 +64,7 @@ function releaseButton(element, key) {
 function checkPlayButtonState() {
     const pressedCount = Object.values(pressedButtons).filter(value => value).length;
     play.disabled = pressedCount < 2;
+    //showState();
 }
 
 pressDown(x, "playerX");
@@ -72,6 +72,26 @@ pressDown(o, "playerO");
 pressDown(solo, "solo");
 pressDown(bot, "bot");
 pressDown(inf, "infinite");
+
+
+function showState() {
+    const buttonContainer = document.getElementById("info");
+    buttonContainer.innerHTML = "";
+    for (let key in pressedButtons) {
+        if (pressedButtons.hasOwnProperty(key) && pressedButtons[key]) {
+            const paragraph = document.createElement("p");
+            switch (key) {
+                case "playerX": paragraph.textContent = "O primeiro jogador é o X."; break;
+                case "playerO": paragraph.textContent = "O primeiro jogador é o O."; break;
+                case "solo": paragraph.textContent = "Os dois jogadores jogam localmente um contra o outro."; break;
+                case "bot": paragraph.textContent = "O adversário é um robô."; break;
+                case "infinite": paragraph.textContent = "Versão do jogo infinito."; break;
+            }
+            paragraph.classList.add("show");
+            buttonContainer.appendChild(paragraph); 
+        }
+    }
+}
 
 play.addEventListener("click", () => {
     localStorage.setItem("pressedButtons", JSON.stringify(pressedButtons));
