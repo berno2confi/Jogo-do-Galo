@@ -78,4 +78,4 @@ play.addEventListener("click", () => {
     window.location.href = "actualGame/game.html";
 });
 
-//checkPlayButtonState();
+checkPlayButtonState();

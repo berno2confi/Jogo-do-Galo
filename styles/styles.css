@@ -69,10 +69,25 @@ button {
     gap: 1em;
 }
 
+#allBtns {
+    display: flex;
+    flex-direction: column;
+    #play {
+        transform: translateX(340px);
+        font-size: 50px;
+        width: 200px;
+        height: 100px;
+    }
+    #play:disabled {
+        background-color: #aaa; /* Grey background for disabled state */
+    }
+}
+
 #selectionContainer {
     display: grid;
-    row-gap: 11em;
-    column-gap: 13em;
+    row-gap: 10em;
+    column-gap: 3em;
+    justify-content: center;
 
     button {
         font-size: 32px;
@@ -81,39 +96,23 @@ button {
     }
 
     #playerX {
-        transform: translateX(7em);
-        grid-area: 1 / 1 / span 1 / span 1;
+        grid-area: 2 / 1 / span 1 / span 1;
     }
-
     #playerO {
-        transform: translateY(3em);
-        grid-column: 3;
-        grid-row: 1;
-    }
-
-    #solo {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
-    #bot {
-        transform: translateY(5em) translateX(-2em);
-        grid-column: 3;
-        grid-row: 2;
-    }
-
-    #infinite {
-        transform: translateX(4em);
-        grid-column: 1;
-        grid-row: 3;
-    }
-
-    #play {
         grid-column: 2;
         grid-row: 2;
-        font-size: 50px;
-        width: 200px;
-        height: 100px;
+    }
+    #solo {
+        grid-column: 3;
+        grid-row: 2;
+    }
+    #bot {
+        grid-column: 4;
+        grid-row: 2;
+    }
+    #infinite {
+        grid-column: 5;
+        grid-row: 2;
     }
 }
 
