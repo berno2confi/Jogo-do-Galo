@@ -33,7 +33,8 @@ function pressDown(element, key) {
                 releaseButton(bot, "bot");
             if (pressedButtons.playerO)
                 releaseButton(o, "playerO");
-            pressButton(x, "playerX");
+            if (!pressedButtons.playerX)
+                pressButton(x, "playerX");
         }
         else if (key == "bot") {
             if (pressedButtons.solo)
@@ -47,15 +48,23 @@ function pressDown(element, key) {
 function pressButton(element, key) {
     if (pressedButtons[key]) {
         releaseButton(element, key);
-        return;
+    } else {
+        element.classList.add('button-pressed');
+        pressedButtons[key] = true;
     }
-    element.classList.add('button-pressed');
-    pressedButtons[key] = true;
+    checkPlayButtonState();
+    
 }
 
 function releaseButton(element, key) {
     element.classList.remove('button-pressed');
     pressedButtons[key] = false;
+    checkPlayButtonState();
+}
+
+function checkPlayButtonState() {
+    const pressedCount = Object.values(pressedButtons).filter(value => value).length;
+    play.disabled = pressedCount < 2;
 }
 
 pressDown(x, "playerX");
@@ -68,3 +77,5 @@ play.addEventListener("click", () => {
     localStorage.setItem("pressedButtons", JSON.stringify(pressedButtons));
     window.location.href = "actualGame/game.html";
 });
+
+//checkPlayButtonState();
