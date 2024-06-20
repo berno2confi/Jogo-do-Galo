@@ -52,13 +52,6 @@ function setWinConditions() {
 drawGame();
 setWinConditions();
 
-// initialize()
-// cellClicked()
-// updateCell()
-// changePlayer()
-// checkWinner()
-// botsTurn()
-
 // Initial game logic
 
 let cells;
@@ -69,14 +62,14 @@ let currentPlayer;
 let playerChoice;
 let moves = [];
 let running = false;
+const pressedButtons = JSON.parse(localStorage.getItem("pressedButtons"));
 
 // Get chosen player
 window.addEventListener("load", () => {
-    const pressedButtons = JSON.parse(localStorage.getItem("pressedButtons"));
     if (pressedButtons["playerX"]) playerChoice = "X";
     else playerChoice = "O";
     if (!playerChoice) window.location.href = "../index.html";
-    else initialize();
+    else initialize(); 
 })
 
 
@@ -95,9 +88,7 @@ function initialize() {
     statusText.textContent = `Joga ${currentPlayer}!`;
     running = true;
 
-    //reselectBtn.style.display = "none";
-
-    if (playerChoice === "O") setTimeout(botsTurn, 500);
+    if (playerChoice === "O" && pressedButtons["bot"]) setTimeout(botsTurn, 500);
 }
 
 function cellClicked() {
@@ -108,7 +99,7 @@ function cellClicked() {
 
     updateCell(index);
 
-    if (running) setTimeout(botsTurn, 1200);
+    if (running && pressedButtons["bot"]) setTimeout(botsTurn, 1200);
 
 }
 
@@ -145,16 +136,14 @@ function checkWinner() {
         if (currentPlayer == "X") statusText.style.color = "#FF6666";  
         else statusText.style.color = "#ADD8E6"; 
         running = false;
-        //reselectBtn.style.display = "block"; 
     } 
     else if (![...cells].map(cell => cell.textContent).includes("")) {  
         statusText.textContent = `Empate!`;
         running = false;
-        reselectBtn.style.display = "block"; 
     }
     else {
         changePlayer();
-        if (moves.length >= 6) setTimeout(continueGame, 700);  // 6 is just the number of moves in a 3x3 grid
+        if (moves.length >= 6 && pressedButtons["infinite"]) setTimeout(continueGame, 700);  // 6 is just the number of moves in a 3x3 grid
     }
 }
 
@@ -169,9 +158,7 @@ function restartGame() {
     });
     running = true;
 
-    //reselectBtn.style.display = "none"; 
-
-    if (playerChoice == "O") setTimeout(botsTurn, 500);
+    if (playerChoice == "O" && pressedButtons["bot"]) setTimeout(botsTurn, 500);
 }
 
 function continueGame() {
@@ -184,7 +171,7 @@ function continueGame() {
 }
 
 function reselectPlayer() {
-    localStorage.removeItem("jogador");
+    localStorage.removeItem("pressedButtons");
     window.location.href = "../index.html";
 }
 

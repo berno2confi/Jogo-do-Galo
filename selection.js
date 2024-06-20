@@ -15,6 +15,10 @@ let pressedButtons = {
 
 function pressDown(element, key) {
     element.addEventListener('click', () => {
+        if (key == "infinite" && Object.values(pressedButtons).filter(value => value).length < 3) {
+            if (!pressedButtons.solo) pressButton(solo, "solo");
+            if (!pressedButtons.playerX) pressButton(x, "playerX");
+        }
         // X releases O. O releases X, and solo, if pressed.
         if (key == "playerX") {
             if (pressedButtons.playerO)
@@ -36,11 +40,12 @@ function pressDown(element, key) {
             if (!pressedButtons.playerX)
                 pressButton(x, "playerX");
         }
-        else if (key == "bot") {
+        if (key == "bot") {
             if (pressedButtons.solo)
                 releaseButton(solo, "solo");
         }
         pressButton(element, key);
+        
     });
 }
 
