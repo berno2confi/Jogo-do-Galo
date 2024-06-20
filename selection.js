@@ -15,10 +15,6 @@ let pressedButtons = {
 
 function pressDown(element, key) {
     element.addEventListener('click', () => {
-        if (key == "infinite" && Object.values(pressedButtons).filter(value => value).length < 3) {
-            if (!pressedButtons.solo) pressButton(solo, "solo");
-            if (!pressedButtons.playerX) pressButton(x, "playerX");
-        }
         // X releases O. O releases X, and solo, if pressed.
         if (key == "playerX") {
             if (pressedButtons.playerO)
@@ -68,7 +64,7 @@ function releaseButton(element, key) {
 
 function checkPlayButtonState() {
     const pressedCount = Object.values(pressedButtons).filter(value => value).length;
-    play.disabled = pressedCount < 2;
+    play.disabled = pressedCount < 2 || (pressedButtons.infinite && pressedCount < 3);
     //showState();
 }
 
