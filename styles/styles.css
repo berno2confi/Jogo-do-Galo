@@ -73,6 +73,7 @@ button {
     transform: translateY(-5em);
     display: flex;
     flex-direction: column;
+    position: relative;
 
     #play {
         transform: translateX(340px);
@@ -85,10 +86,16 @@ button {
     }
 
     #info {
-        margin: 0 auto;
+        /* margin: 0 auto;  Removed margin to avoid affecting button positions */
         /*margin-top: 50px;*/
         transform: translateY(5em);
         text-align: center;
+        position: absolute; /* Ensures paragraphs are inserted downwards without pushing buttons */
+        top: 115%; /* Adjust this value to place the #info container as needed */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 600px; /* Optional: set a max width */
     }
 }
 

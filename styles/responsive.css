@@ -1,0 +1,22 @@
+/* Responsive Design */
+@media (max-width: 768px) {
+    #selectionContainer {
+        grid-template-columns: 1fr; /* Change to column layout */
+        row-gap: 2em; /* Adjust gap between rows */
+        column-gap: 0; /* Remove column gap */
+    }
+
+    #allBtns #play {
+        transform: translateX(0);
+        margin: 0 auto 2em auto; /* Center the play button */
+    }
+
+    #buttonWrapper {
+        gap: 1em;
+    }
+
+    button {
+        width: 100%; /* Full width buttons for smaller screens */
+        margin: 0.5em 0; /* Add some vertical margin */
+    }
+}

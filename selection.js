@@ -65,7 +65,7 @@ function releaseButton(element, key) {
 function checkPlayButtonState() {
     const pressedCount = Object.values(pressedButtons).filter(value => value).length;
     play.disabled = pressedCount < 2 || (pressedButtons.infinite && pressedCount < 3);
-    //showState();
+    showState();
 }
 
 pressDown(x, "playerX");
