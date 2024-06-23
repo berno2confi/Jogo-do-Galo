@@ -88,8 +88,13 @@ function showState() {
                 case "bot": paragraph.textContent = "O adversário é um robô."; break;
                 case "infinite": paragraph.textContent = "Versão do jogo infinito."; break;
             }
-            paragraph.classList.add("show");
-            buttonContainer.appendChild(paragraph); 
+            paragraph.classList.add("hidden"); // Initially hide the paragraph
+            buttonContainer.appendChild(paragraph);
+
+            setTimeout(() => {
+                paragraph.classList.remove("hidden");
+                paragraph.classList.add("show");
+            }, 10); 
         }
     }
 }

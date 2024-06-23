@@ -1,22 +1,62 @@
 /* Responsive Design */
 @media (max-width: 768px) {
-    #selectionContainer {
-        grid-template-columns: 1fr; /* Change to column layout */
-        row-gap: 2em; /* Adjust gap between rows */
-        column-gap: 0; /* Remove column gap */
+
+    body {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px;
     }
 
-    #allBtns #play {
-        transform: translateX(0);
-        margin: 0 auto 2em auto; /* Center the play button */
+    #allBtns {
+        margin-top: 5em;  /* move everything 5em down*/
+        grid-template-columns: 1fr; 
+        row-gap: 0em;
+        justify-items: center; 
+        width: 100%; 
+        align-items: center;
+
+        #selectionContainer {
+            button {
+                width: 100%; 
+                margin: 8px 0; 
+            }
+            row-gap: 0px;
+        }
+        #play {
+            transform: none; 
+            margin: 0 auto 1em auto; /* Center the play button */
+            display: block; 
+            max-width: 300px; /* Optional: set a max width */
+        }
+        #playerX {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        #playerO {
+            grid-column: 1;
+            grid-row: 2;
+        }
+        #solo {
+            grid-column: 1;
+            grid-row: 3;
+        }
+        #bot {
+            grid-column: 1;
+            grid-row: 4;
+        }
+        #infinite {
+            grid-column: 1;
+            grid-row: 5;
+        }
     }
 
-    #buttonWrapper {
-        gap: 1em;
+
+    #info {
+        width: 100%; /* Full width for info section */
+        max-width: 600px; /* Optional: set a max width */
+        margin-top: 2em; /* Add some spacing from the buttons */
+        text-align: center; /* Center align text */
     }
 
-    button {
-        width: 100%; /* Full width buttons for smaller screens */
-        margin: 0.5em 0; /* Add some vertical margin */
-    }
 }

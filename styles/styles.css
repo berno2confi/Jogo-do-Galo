@@ -179,8 +179,20 @@ button:active {
 #info p {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
 }
 
 #info p.show {
     opacity: 1;
+    max-height: 100px; /* Adjust as needed */
 }
+
+#info p.hidden {
+    opacity: 0;
+    max-height: 0;
+}
+
+
+
